@@ -8,7 +8,7 @@ class Datosbase(models.Model):
 class Proveedor(Datosbase):
     TIPO = [
         ('Empresa','Empresa'),
-        ('Endividuo','Individuo'),
+        ('Individuo','Individuo'),
     ]
     tipo = models.CharField(max_length=10,choices=TIPO, blank=False, null=False)
     

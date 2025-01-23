@@ -51,25 +51,37 @@
                     <div class="canvas-items">
                         <a href="#">
                             <i class="fa-solid fa-cash-register pe-3"></i>
-                            <span>Compras</span>
+                            <span>Gastos</span>
                         </a>
                     </div>
                     <div class="canvas-items">
-                        <a href="#">
+                        <a href="{% url 'ventas:ventas' %}">
                             <i class="fa-solid fa-money-bill-transfer pe-3"></i>
                             <span>Ventas</span>
                         </a>
                     </div>
                     <div class="canvas-items">
-                        <a href="#">
+                        <a href="{% url 'personal:regEmpleados' %}">
                             <i class="fa-solid fa-person-digging pe-3"></i>
                             <span>Empleados</span>
                         </a>
                     </div>
                     <div class="canvas-items">
-                        <a href="#">
+                        <a href="{% url 'productos:regMateriales' %}">
                             <i class="fa-solid fa-box-open pe-3"></i>
-                            <span>Inventario</span>
+                            <span>Materiales</span>
+                        </a>
+                    </div>
+                    <div class="canvas-items">
+                        <a href="{% url 'productos:regProductos' %}">
+                            <i class="fa-solid fa-rectangle-list pe-3"></i>
+                            <span>Productos</span>
+                        </a>
+                    </div>
+                    <div class="canvas-items">
+                        <a href="{% url 'personal:regProveedores' %}">
+                            <i class="fa-solid fa-truck-field pe-3"></i>
+                            <span>Proveedores</span>
                         </a>
                     </div>
                 </div>

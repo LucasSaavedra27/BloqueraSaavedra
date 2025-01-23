@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Tabla de Productos</title>
+    <title>Registro de ventas PDF</title>
     <style>
         table {
             width: 100%;
@@ -17,6 +17,12 @@
             background-color: orange;
             color: white;
         }
+        ul {
+            list-style:circle;
+            margin: 0;
+            padding: 0;
+        }
+
     </style>
 </head>
 <body>
@@ -51,7 +57,15 @@
                 <td>{{ venta.formaDePago }}</td>
                 <td>{{ venta.lugarVenta }}</td>
                 <td>${{ venta.total }}</td>
-                <td>Detalles</td>
+                <td>
+                    <ul>
+                        {% for detalle in venta.detalleVenta.all %}
+                            <li>
+                                {{ detalle.block.nombre }} - {{ detalle.cantidad }} U - ${{ detalle.subTotal }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </td>
             </tr>
         {% empty %}
             <tr>

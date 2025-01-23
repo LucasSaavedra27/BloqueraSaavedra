@@ -7,6 +7,7 @@ from django.template.loader import get_template
 from django.http import HttpResponse
 from xhtml2pdf import pisa
 from io import BytesIO
+from datetime import datetime
 
 def regVentas(request):
     ventas = Venta.objects.all()
@@ -104,8 +105,9 @@ def buscarVentas(request):
 
 
 def generarPDFVentas(request):
-    ventas = Venta.objects.all()  # Obtener todas las ventas
-    
+#ventas = Venta.objects.all()  # Obtener todas las ventas
+    ventas = Venta.objects.prefetch_related('detalleVenta').all()
+
     # Obtener los valores de las fechas desde la solicitud GET
     fecha_inicio = request.GET.get('busqueda_inicio_PDF')
     fecha_fin = request.GET.get('busqueda_fin_PDF')
@@ -117,15 +119,15 @@ def generarPDFVentas(request):
         ventas = ventas.filter(fechaDeVenta=fecha_inicio)
     elif fecha_fin:
         ventas = ventas.filter(fechaDeVenta=fecha_fin)
-    
         
-    
     template = get_template('ventas/tabla.html')
     
     html = template.render({'ventas': ventas, 'fecha_inicio': fecha_inicio, 'fecha_fin': fecha_fin})
+    
+    fecha_hora_actual = datetime.now().strftime("%d-%m-%Y - %H:%M")
 
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="ventas.pdf"'
+    response['Content-Disposition'] = f'attachment; filename="Registro de ventas - {fecha_hora_actual} hs.pdf"'
 
     pisa_status = pisa.CreatePDF(BytesIO(html.encode('UTF-8')), dest=response)
 

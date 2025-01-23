@@ -21,7 +21,6 @@
 }
 
 .canvas-items{
-    padding: 1.7rem;
     font-size: 20px;
 }
 
@@ -34,6 +33,10 @@
 .canvas-items a{
     color: #ffffff;
     text-decoration: none;
+    display: block; 
+    width: 100%;
+    height: 100%;
+    padding: 1.7rem;
 }
 
 .offcanvas-header{
