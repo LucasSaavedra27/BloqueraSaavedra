@@ -28,8 +28,14 @@
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ producto.nombre }}</td>
+                            {% load l10n %}
+                            {% localize on %}
                             <td>${{ producto.precioDeCosto }}</td>
+                            {% endlocalize %}
+                            {% load l10n %}
+                            {% localize on %}
                             <td>${{ producto.precioDeVenta }}</td>
+                            {% endlocalize %}
                             <td>{{ producto.fechaDeElaboracion|date:"d/m/Y" }}</td>
                             {% if producto.cantidadDisponible <= producto.cantidadMinRequerida %}
                                 <td style="background-color: #cf4128;">

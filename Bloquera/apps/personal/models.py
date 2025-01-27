@@ -5,6 +5,9 @@ class Datosbase(models.Model):
     direccion = models.CharField(max_length=50,null=False,blank=False)
     telefono = models.CharField(max_length=10,null=False,blank=False)
     
+    def __str__(self):
+        return self.nombre
+    
 class Proveedor(Datosbase):
     TIPO = [
         ('Empresa','Empresa'),

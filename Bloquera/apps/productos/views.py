@@ -16,7 +16,7 @@ def agregarProducto(request):
         form = FormularioProducto(request.POST)
         if form.is_valid():
             form.save() 
-            return redirect('/productos')  
+            return redirect('/productos/regProductos')  
     return render(request, 'productos/agregarProducto.html', {'form': form})
 
 class ProductoUpdateView(UpdateView):

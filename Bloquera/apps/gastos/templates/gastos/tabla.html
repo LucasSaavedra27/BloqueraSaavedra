@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registro de ventas PDF</title>
+    <title>Registro de Gastos PDF</title>
     <style>
         table {
             width: 100%;
@@ -26,7 +26,7 @@
     </style>
 </head>
 <body>
-    <h1 style="text-align: center;"><strong>Listado de ventas</strong></h1>
+    <h1 style="text-align: center;"><strong>Listado de Gastos</strong></h1>
     <strong>Rango de busqueda</strong><br>
     {% if fecha_inicio %}
         <strong>Fecha de inicio: <span>{{fecha_inicio}}</span></strong><br>
@@ -42,32 +42,38 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Fecha de venta</th>
+                <th>Fecha de gasto</th>
+                <th>Tipo</th>
                 <th>Forma de pago</th>
-                <th>Lugar de entrega</th>
+                <th>Proveedor</th>
+                <th>Empleado</th>
                 <th>Total</th>
                 <th>Detalle</th>
             </tr>
         </thead>
         <tbody>
-        {% for venta in ventas %}
+        {% for gasto in gastos %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td>{{ venta.fechaDeVenta|date:"d/m/Y" }}</td>
-                <td>{{ venta.formaDePago }}</td>
-                <td>{{ venta.lugarVenta }}</td>
+                <td>{{ gasto.fecha|date:"d/m/Y" }}</td>
+                <td>{{ gasto.tipo }}</td>
+                <td>{{ gasto.formaDePago }}</td>
+                {% if gasto.proveedor is None %}
+                    <td> - </td>
+                {% else %}
+                    <td>{{ gasto.proveedor }}</td>
+                {% endif %}
+                {% if gasto.empleado is None %}
+                    <td> - </td>
+                {% else %}
+                    <td>{{ gasto.empleado }}</td>
+                {% endif %}
                 {% load l10n %}
-                    {% localize on %}
-                    <td>${{ venta.total }}</td>
-                    {% endlocalize %}
+                {% localize on %}
+                    <td>${{ gasto.monto }}</td>
+                {% endlocalize %}
                 <td>
-                    <ul>
-                        {% for detalle in venta.detalleVenta.all %}
-                            <li>
-                                {{ detalle.block.nombre }} - {{ detalle.cantidad }} U - ${{ detalle.subTotal }}
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    arreglar
                 </td>
             </tr>
         {% empty %}
@@ -77,5 +83,7 @@
         {% endfor %}
         </tbody>
     </table>
+
+   
 </body>
 </html>

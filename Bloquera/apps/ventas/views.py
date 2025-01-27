@@ -5,12 +5,12 @@ from django.http import JsonResponse
 from .models import Block, Venta, DetalleVenta
 from django.template.loader import get_template
 from django.http import HttpResponse
-from xhtml2pdf import pisa
+from xhtml2pdf import pisa # type: ignore
 from io import BytesIO
 from datetime import datetime
 
 def regVentas(request):
-    ventas = Venta.objects.all()
+    ventas = Venta.objects.all().order_by('-fechaDeVenta')
     paginator = Paginator(ventas, 10)  
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
@@ -39,7 +39,7 @@ def agregarVenta(request):
             
             venta.total = totalVenta
             venta.save() #acá se actualiza la venta con todos los detalles de venta y se actualiza el precio total de la venta
-            return redirect('/ventas')
+            return redirect('/ventas/regVentas')
     else:
         ventaForm = FormularioVenta()
         detalleVentaFormset = DetalleVentaFormSet()

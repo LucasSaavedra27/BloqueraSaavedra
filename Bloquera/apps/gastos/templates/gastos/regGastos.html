@@ -1,15 +1,15 @@
 {% extends 'base/base.html' %}
 {% load static %}
 
-{% block tittle %}Ventas{% endblock%}
+{% block tittle %}Gastos{% endblock%}
 {% block content %}
 <main class="main">
     <div class="container">
         <div class="container-busqueda">
-            <h3 class="text-center pt-3">Registro de ventas</h3>
+            <h3 class="text-center pt-3">Registro de Gastos</h3>
             <div class="row align-items-center">
                 <div class="col-md-6 mb-3">
-                    <form action="{% url 'ventas:buscarVentas' %}" method="get" class="row align-items-center">
+                    <form action="{% url 'gastos:buscarGastos' %}" method="get" class="row align-items-center">
                         <div class="col mb-2">
                             <label for="busqueda-inicio">Fecha de inicio:</label>
                             <input type="date" name="busqueda_inicio" class="form-control" value="{{ fecha_inicio }}">                   
@@ -18,7 +18,7 @@
                             <input type="date" name="busqueda_fin" class="form-control" value="{{ fecha_fin }}">
                         </div>
                         <div class="col">
-                            <a href="{% url 'ventas:regVentas' %}" class="btn btn-link"><i class="fa-solid fa-rotate-left color-prim"></i></a>
+                            <a href="{% url 'gastos:regGastos' %}" class="btn btn-link"><i class="fa-solid fa-rotate-left color-prim"></i></a>
                             <button type="submit" class="btn btn-secondary"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </form>
@@ -28,7 +28,7 @@
         </div>
         <div class="container-btn-add-pdf">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                    <a href="{% url 'ventas:agregarVenta'%}" class="btn btn-link"><i class="fa-solid fa-square-plus color-prim"></i></a>
+                    <a href="{% url 'gastos:agregarGastos'%}" class="btn btn-link"><i class="fa-solid fa-square-plus color-prim"></i></a>
                     <a class="btn btn-link" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-file-pdf color-prim"></i></a>
             </div>
         </div>
@@ -42,7 +42,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{% url 'ventas:generarPDFVentas' %}" method="get" class="row align-items-center">
+                        <form action="{% url 'gastos:generarPDFGastos' %}" method="get" class="row align-items-center">
                             <div class="col mb-2">
                                 <label for="busqueda-inicio">Fecha de inicio:</label>
                                 <input type="date" name="busqueda_inicio_PDF" class="form-control" value="{{ fecha_inicio }}">                   
@@ -105,24 +105,36 @@
                     <thead class="bg-table">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Fecha de venta</th>
+                            <th scope="col">Fecha de gasto</th>
+                            <th scope="col">Tipo</th>
                             <th scope="col">Forma de pago</th>
-                            <th scope="col">Lugar de entrega</th>
+                            <th scope="col">Proveedor</th>
+                            <th scope="col">Empleado</th>
                             <th scope="col">Total</th>
                             <th scope="col">Detalle</th>
                         </tr>
                     </thead>
                     <tbody>
-                    {% for venta in page_obj %} 
+                    {% for gasto in page_obj %} 
                     <tr>
                         <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ venta.fechaDeVenta|date:"d/m/Y" }}</td>
-                        <td>{{ venta.formaDePago }}</td>
-                        <td>{{ venta.lugarVenta }}</td>
+                        <td>{{ gasto.fecha|date:"d/m/Y" }}</td>
+                        <td>{{ gasto.tipo }}</td>
+                        <td>{{ gasto.formaDePago }}</td>
+                        {% if gasto.proveedor is None %}
+                            <td> - </td>
+                        {% else %}
+                            <td>{{ gasto.proveedor }}</td>
+                        {% endif %}
+                        {% if gasto.empleado is None %}
+                            <td> - </td>
+                        {% else %}
+                            <td>{{ gasto.empleado }}</td>
+                        {% endif %}
                         {% load l10n %}
-                            {% localize on %}
-                            <td>${{ venta.total }}</td>
-                            {% endlocalize %}
+                        {% localize on %}
+                            <td>${{ gasto.monto }}</td>
+                        {% endlocalize %}
                         <td>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modalDetallesVenta" class="btnVerDetalles" data-venta-id="{{ venta.id }}"><i class="fa-solid fa-eye color-prim hover" title="Ver detalles"></i></a>
                         </td>

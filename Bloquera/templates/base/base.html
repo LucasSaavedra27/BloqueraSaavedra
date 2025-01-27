@@ -49,13 +49,13 @@
                         </a>
                     </div>
                     <div class="canvas-items">
-                        <a href="#">
+                        <a href="{% url 'gastos:regGastos' %}">
                             <i class="fa-solid fa-cash-register pe-3"></i>
                             <span>Gastos</span>
                         </a>
                     </div>
                     <div class="canvas-items">
-                        <a href="{% url 'ventas:ventas' %}">
+                        <a href="{% url 'ventas:regVentas' %}">
                             <i class="fa-solid fa-money-bill-transfer pe-3"></i>
                             <span>Ventas</span>
                         </a>
@@ -93,7 +93,7 @@
 
     {% endblock %}
 
-    <footer class="footer">
+    <footer class="footer mt-4">
         <p>&copy; 2025 Copyright - Bloquera Saavedra. <br>Todos los derechos reservados.</p>
     </footer>
 

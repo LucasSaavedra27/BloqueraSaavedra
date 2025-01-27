@@ -4,6 +4,11 @@ from . import views
 app_name = 'gastos'
 
 urlpatterns = [
-    path('', views.index, name='index'),  # Ajusta esto según tus vistas
-    # Agrega más rutas aquí
+    path('regGastos/', views.regGastos, name='regGastos'),  
+    path('agregarGastos/', views.agregarGastos, name='agregarGastos'), 
+    path('buscarGastos/', views.buscarGastos, name='buscarGastos'),
+    path('generarPDFGastos/',views.generarPDFGastos,name='generarPDFGastos'),
+    path('obtener-precio-material/<int:material_id>/', views.obtener_precio_material, name='obtener-precio-material'),
+
+   
 ]
