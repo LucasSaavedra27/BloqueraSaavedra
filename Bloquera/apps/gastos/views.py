@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
-from apps.gastos.models import Gasto
+from apps.gastos.models import Gasto, DetallesGastosMateriales
 from apps.gastos.forms import GastoForm, DetalleGastoFormSet
 from django.template.loader import get_template
 from django.http import HttpResponse
@@ -60,12 +60,11 @@ def buscarGastos(request):
     else:
         redirect("/gastos/regGastos")
    
-    return render(request, 'gastos/RegGastos.html', {'page_obj': gastos, 'fecha_inicio': fecha_inicio, 'fecha_fin': fecha_fin})
+    return render(request, 'gastos/regGastos.html', {'page_obj': gastos, 'fecha_inicio': fecha_inicio, 'fecha_fin': fecha_fin})
 
 
 def generarPDFGastos(request):
-#ventas = Venta.objects.all()  # Obtener todas las ventas
-    gastos = Gasto.objects.all()
+    gastos = Gasto.objects.prefetch_related('detalleGasto').all()
 
     # Obtener los valores de las fechas desde la solicitud GET
     fecha_inicio = request.GET.get('busqueda_inicio_PDF')
@@ -102,3 +101,33 @@ def obtener_precio_material(request, material_id):
         return JsonResponse({'precio': material.precioDeCosto})
     except Materiales.DoesNotExist:
         return JsonResponse({'error': 'Producto no encontrado'}, status=404)
+    
+
+def obtener_detalles_gastos(request, gasto_id):
+    try:
+        # Obtener la venta y sus detalles
+        gasto = Gasto.objects.get(id=gasto_id)
+        detalles_gasto = DetallesGastosMateriales.objects.filter(gasto_id=gasto_id)
+
+        # Convertir los detalles de la venta a una lista
+        detalles = [
+            {
+                'material': detalle.materiales.nombre,
+                'cantidad': detalle.cantidad,
+                'precioDeCosto': detalle.materiales.precioDeCosto,
+                'subtotal': detalle.subTotal,
+            }
+            for detalle in detalles_gasto
+        ]
+
+        # Devolver los datos como JSON
+        return JsonResponse({
+            'id': gasto.id,
+            'fecha': gasto.fecha.strftime('%d/%m/%Y'),
+            'total': gasto.monto,
+            'detalles': detalles,
+        })
+    except Gasto.DoesNotExist:
+        return JsonResponse({'error': 'Gasto no encontrado'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)

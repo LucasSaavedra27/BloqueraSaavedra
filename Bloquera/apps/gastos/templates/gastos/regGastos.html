@@ -135,9 +135,16 @@
                         {% localize on %}
                             <td>${{ gasto.monto }}</td>
                         {% endlocalize %}
+                        {% if gasto.tipo == 'Material' %}
                         <td>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalDetallesVenta" class="btnVerDetalles" data-venta-id="{{ venta.id }}"><i class="fa-solid fa-eye color-prim hover" title="Ver detalles"></i></a>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalDetallesGasto" class="btnVerDetalles" data-gasto-id="{{ gasto.id }}"><i class="fa-solid fa-eye color-prim hover" title="Ver detalles"></i></a>
                         </td>
+                        {% else %}
+                        <td>
+                            <i class="fa-solid fa-eye color-prim hover" title="Ver detalles"></i>
+                        </td>
+                        {% endif %}
+                        
                     </tr>
                     {% empty %}
                     <tr>
@@ -155,20 +162,20 @@
 <!-- Botón que abre el modal -->
 
   <!-- Modal -->
-  <div class="modal fade" id="modalDetallesVenta" tabindex="-1" aria-labelledby="modalDetallesVentaLabel" aria-hidden="true">
+  <div class="modal fade" id="modalDetallesGasto" tabindex="-1" aria-labelledby="modalDetallesGastoLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="modalDetallesVentaLabel">Detalles de la venta</h5>
+          <h5 class="modal-title" id="modalDetallesGastoLabel">Detalles del gasto</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <!-- Aquí pondremos los detalles de la venta -->
-            <p><strong>ID de venta:</strong> <span id="modal-venta-id"></span></p>
-            <p><strong>Fecha:</strong> <span id="modal-venta-fecha"></span></p>
-            <p><strong>Total:</strong> <span id="modal-venta-total"></span></p>
-            <h6><strong>Productos:</strong></h6>
-            <ul id="modal-detalles-productos">
+            <p><strong>ID de gasto:</strong> <span id="modal-gasto-id"></span></p>
+            <p><strong>Fecha:</strong> <span id="modal-gasto-fecha"></span></p>
+            <p><strong>Total:</strong> <span id="modal-gasto-total"></span></p>
+            <h6><strong>Materiales:</strong></h6>
+            <ul id="modal-detalles-materiales">
               <!-- Los productos de la venta se cargarán aquí -->
             </ul>
           </div>
@@ -182,7 +189,7 @@
 
 {% block js %}
     <script src="{% static 'js/tratamientoFechas.js'%}"></script>
-    <script src="{% static 'js/modalDetallesVenta.js'%}"></script>
+    <script src="{% static 'js/modalDetallesGastos.js'%}"></script>
       
 {% endblock %}
 {% endblock %}

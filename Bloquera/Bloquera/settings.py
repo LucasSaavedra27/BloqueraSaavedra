@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'apps.estadisticas',
     'apps.productos',
     'apps.personal',
+    'apps.registration',
+    'apps.inicio',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +143,13 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Redirección después de iniciar sesión
+LOGIN_REDIRECT_URL = '/ventas/regVentas'
+
+# Redirección después de cerrar sesión
+LOGOUT_REDIRECT_URL = '/gastos/regGastos'
+
+# Ruta a la página de inicio de sesión (si no usas decoradores específicos)
+LOGIN_URL = '/login/'

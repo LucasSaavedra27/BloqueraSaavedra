@@ -98,9 +98,9 @@ def buscarVentas(request):
     elif fecha_fin:
         ventas = ventas.filter(fechaDeVenta=fecha_fin)
     else:
-        redirect("/ventas")
+        redirect("/ventas/regGastos")
    
-    return render(request, 'ventas/Regventas.html', {'page_obj': ventas, 'fecha_inicio': fecha_inicio, 'fecha_fin': fecha_fin})
+    return render(request, 'ventas/regVentas.html', {'page_obj': ventas, 'fecha_inicio': fecha_inicio, 'fecha_fin': fecha_fin})
 
 
 

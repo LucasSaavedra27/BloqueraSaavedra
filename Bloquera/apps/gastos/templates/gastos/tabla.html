@@ -73,7 +73,13 @@
                     <td>${{ gasto.monto }}</td>
                 {% endlocalize %}
                 <td>
-                    arreglar
+                    <ul>
+                        {% for detalle in gasto.detalleGasto.all %}
+                            <li>
+                                {{ detalle.materiales.nombre }} - {{ detalle.cantidad }} U - ${{ detalle.subTotal }}
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </td>
             </tr>
         {% empty %}
