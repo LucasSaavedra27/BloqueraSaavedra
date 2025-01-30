@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="recursos/favicon-16x16.png" type="image/png">
+    <link rel="icon" href="{% static 'img/logo 16x16.png' %}" type="image/png">
     <title>Bloquera Saavedra</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
@@ -13,32 +13,31 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fa-solid fa-bars" style="color: white; font-size: 30px;"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto">
-              <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'inicio:index' %}">INICIO</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">SOBRE NOSOTROS</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">CONTACTO</a>
-              </li>
-            </ul>
-            <div class="d-flex">
-              <a href="{% url 'login' %}" class="btn" style="color: black; background-color: white;">
-                <i class="fas fa-sign-in-alt pe-2"></i>Iniciar sesión
-              </a>
-            </div>
-          </div>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa-solid fa-bars" style="color: white; font-size: 30px;"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'inicio:index' %}">INICIO</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#seccionGaleria">GALERÍA DE IMÁGENES</a>
+          </li>
+        </ul>
+        <div class="d-flex">
+          <a href="{% url 'login' %}" class="btn" style="color: black; background-color: white;">
+            <i class="fas fa-sign-in-alt pe-2"></i>Iniciar sesión
+          </a>
         </div>
-      </nav>
+      </div>
+    </div>
+  </nav>
 
+
+  <section>
    <div class="container">
         <div class="row glass-card justify-content-center align-items-center shadow">
             <div class="col-12 col-md-6 text-center">
@@ -52,61 +51,90 @@
                     <span>Reconocida por su excelencia en la producción, ofrece una amplia gama de bloques resistentes y duraderos. Además,</span> 
                     <span>realiza envíos a diferentes localidades, garantizando productos de primera clase para la construcción.  ¡ Te ayudamos a cumplir tus sueños !</span>
                 </div>
-                <div class="pt-4"><a class="btn button-rounded" href="https://wa.me/3834231259?text=Buenas! Dejame tu mensaje y pronto te estaré asesorando. Gracias" style="text-decoration: none;">COMUNÍCATE CON NOSOTROS</a></div>
+                <div class="pt-4"><a class="btn button-rounded" href="https://wa.me/3834231259?text=Buenas! Dejame tu mensaje y pronto te estaré asesorando. Gracias" style="text-decoration: none;" target="_blank">COMUNÍCATE CON NOSOTROS</a></div>
             </div>
             <div class="col-12 col-md-6 d-flex justify-content-center ps-5">
-            <img class="img-animada" src="/recursos/Recurso 1.png" style="width: 75%;" alt="Logo bloquera">
+            <img class="img-animada" src="{% static 'img/logo-front.png' %}" style="width: 75%;" alt="Logo bloquera">
             </div>
         </div>
     </div>
+  </section>
 
+  <section>
+    <div class="container d-flex justify-content-center">
+      <div class="card-calculadora">
+        <h4 class="text-center mt-4 pb-4" style="font-family:  Cardo, serif; color: white; font-size: 40px;">Calculadora de block por metro cuadrado</h4>
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-6 d-flex justify-content-center">
+            <img src="{% static 'img/block-front.png' %}" alt="Block" style="width: 65%;">
+          </div>
+          <div class="col-md-6">
+            <label for="metrosCuadrados" style="font-size: 20px;">Área a cubrir (Metros cuadrados)</label>
+            <input type="number" id="metrosCuadrados" class="form-control" style="width: 40%;">
+            <label for="resultado" class="pt-3"  style="font-size: 20px; display: none;" id="resultadoLabel">Cantidad de block necesaria:</label>
+            <input type="number" class="form-control" id="resultado" style="width: 40%; background-color: #ec912b; border: none; display: none; color: white;" disabled>
+            <button class="btn-calcular-block mb-2" id="btnCalcular">Calcular</button>
+            <button type="reset" id="btnReiniciar" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <a href="https://wa.me/3834231259?text=Buenas! Dejame tu mensaje y pronto te estaré asesorando. Gracias" target="_blank" class="whatsapp-icon">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Logo">
+  </a>
+
+  <section id="seccionGaleria">
     <div class="container">
         <h4 class="d-flex justify-content-center" style="font-family:  Cardo, serif; color: white; font-size: 40px;">Galería de imágenes</h4>
         <div class="row">
           <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
             <div class="card card-img">
-              <img src="/recursos/img1.jpeg" class="img-card" alt="imgbloquera">
+              <img src="{% static 'img/img1.jpeg' %}" class="img-card" alt="imgbloquera" loading="lazy" width="650" height="400">
             </div>
           </div>
           <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
             <div class="card card-img">
-              <img src="/recursos/img2.jpeg" class="img-card" alt="imgbloquera">
+              <img src="{% static 'img/img2.jpeg' %}" class="img-card" alt="imgbloquera" loading="lazy" width="650" height="400">
             </div>
           </div>
           <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
             <div class="card card-img">
-              <img src="/recursos/img3.jpeg" class="img-card" alt="imgbloquera">
+              <img src="{% static 'img/img3.jpeg' %}" class="img-card" alt="imgbloquera" loading="lazy" width="650" height="400">
             </div>
           </div>
           <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
             <div class="card card-img">
-              <img src="/recursos/img4.jpeg" class="img-card" alt="imgbloquera">
+              <img src="{% static 'img/img4.jpeg' %}" class="img-card" alt="imgbloquera" loading="lazy" width="650" height="400">
             </div>
           </div>
         </div>
         <div class="row">
             <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
               <div class="card card-img">
-                <img src="/recursos/img5.jpeg" class="img-card" alt="imgbloquera">
+                <img src="{% static 'img/img5.jpeg' %}" class="img-card" alt="imgbloquera" loading="lazy" width="650" height="400">
               </div>
             </div>
             <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
               <div class="card card-img">
-                <img src="/recursos/img6.jpeg" class="img-card" alt="imgbloquera">
+                <img src="{% static 'img/img6.jpeg' %}" class="img-card" alt="imgbloquera" loading="lazy" width="650" height="400">
               </div>
             </div>
             <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
               <div class="card card-img">
-                <img src="/recursos/img7.jpeg" class="img-card" alt="imgbloquera">
+                <img src="{% static 'img/img7.jpeg' %}" class="img-card" alt="imgbloquera" loading="lazy" width="650" height="400">
               </div>
             </div>
             <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
               <div class="card card-img">
-                <img src="/recursos/img8.jpeg" class="img-card" alt="imgbloquera">
+                <img src="{% static 'img/img8.jpeg' %}" class="img-card" alt="imgbloquera" loading="lazy" width="650" height="400">
               </div>
             </div>
           </div>
       </div>
+    </section>
 
     <footer id="footer" class="footer">
 
@@ -126,7 +154,7 @@
     
       </footer>
       
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
+    <script src="{% static 'js/index.js' %}"></script>
+  </body>
 </html>
