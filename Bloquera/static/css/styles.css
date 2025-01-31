@@ -269,3 +269,11 @@ border-radius: 10px;
     background-color: rgb(173, 106, 29);
     color: rgb(255, 255, 255);
 }
+
+.contenedor-login{
+    height: 80dvh;
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
