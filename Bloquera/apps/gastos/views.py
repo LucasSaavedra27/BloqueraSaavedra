@@ -9,9 +9,9 @@ from io import BytesIO
 from datetime import datetime
 from apps.productos.models import Materiales
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
-
-
+@login_required
 def regGastos(request):
     gastos = Gasto.objects.all().order_by('-fecha')  # Ordenar por fecha descendente
     paginator = Paginator(gastos, 10)  
@@ -19,7 +19,7 @@ def regGastos(request):
     page_obj = paginator.get_page(page_number)
     return render(request,'gastos/regGastos.html',{'page_obj':page_obj})
 
-
+@login_required
 def agregarGastos(request):
     if request.method == 'POST':
         gastoForm = GastoForm(request.POST)
@@ -46,7 +46,7 @@ def agregarGastos(request):
 
     return render(request, 'gastos/agregarGastos.html', {'gastoForm': gastoForm, 'detalleGastoFormSet': detalleGastoFormSet})
 
-
+@login_required
 def buscarGastos(request):
     gastos = Gasto.objects.all()
     fecha_inicio = request.GET.get('busqueda_inicio')
@@ -62,7 +62,7 @@ def buscarGastos(request):
    
     return render(request, 'gastos/regGastos.html', {'page_obj': gastos, 'fecha_inicio': fecha_inicio, 'fecha_fin': fecha_fin})
 
-
+@login_required
 def generarPDFGastos(request):
     gastos = Gasto.objects.prefetch_related('detalleGasto').all()
 
@@ -94,7 +94,7 @@ def generarPDFGastos(request):
     
     return response
 
-
+@login_required
 def obtener_precio_material(request, material_id):
     try:
         material = Materiales.objects.get(pk=material_id)
@@ -102,7 +102,7 @@ def obtener_precio_material(request, material_id):
     except Materiales.DoesNotExist:
         return JsonResponse({'error': 'Producto no encontrado'}, status=404)
     
-
+@login_required
 def obtener_detalles_gastos(request, gasto_id):
     try:
         # Obtener la venta y sus detalles

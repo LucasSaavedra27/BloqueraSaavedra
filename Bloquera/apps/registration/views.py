@@ -12,6 +12,6 @@ def login_view(request):
             error_message = "Nombre de usuario o contraseña incorrectos."  
         else:
             login(request, user)
-            return redirect('ventas:regVentas')
+            return redirect('estadisticas:estadisticas')
 
     return render(request, 'registration/login.html', {'error_message': error_message})

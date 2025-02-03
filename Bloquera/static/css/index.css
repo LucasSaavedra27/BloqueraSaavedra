@@ -187,15 +187,30 @@ body{
   background-color: rgb(236, 145, 43,0.8);
 }
 
-.card-calculadora{
+.card-calculadora {
+  display: flex;
+  flex-direction: column; 
   justify-content: center;
-  width: 60%;
-  height: 30%;
-  border-radius: 50px;
-  background-color: rgb(255, 255, 255,0.1);
+  width: 90%; 
+  max-width: 1200px; 
+  height: auto; 
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 0.1);
   padding: 2rem;
+  margin: auto; 
 }
 
+.card-calculadora img {
+  max-width: 100%; 
+  height: auto;
+}
+
+.card-calculadora input,
+.card-calculadora button {
+  width: 100%;
+  max-width: 300px; 
+  margin: 0 auto; 
+}
 .whatsapp-icon {
   position: fixed;
   bottom: 20px;

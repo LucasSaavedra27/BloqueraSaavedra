@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-x6(&ku6-a4f96@u-b#p!1j)_%(vvm^vtd7sjnl=!nhop%-#)s*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['bloquerasaavedra.com', 'www.bloquerasaavedra.com']
 
 
 # Application definition
@@ -84,10 +84,15 @@ WSGI_APPLICATION = 'Bloquera.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'u540064298_bloqueraSaa', 
+        'USER': 'u540064298_marcos2403',             
+        'PASSWORD': 'Ocotero12',      
+        'HOST': '193.203.175.194',              
+        'PORT': '3306',                  
     }
 }
+
 
 
 # Password validation
@@ -146,10 +151,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Redirección después de iniciar sesión
-LOGIN_REDIRECT_URL = '/ventas/regVentas'
+LOGIN_REDIRECT_URL = '/estadisticas/'
 
 # Redirección después de cerrar sesión
-LOGOUT_REDIRECT_URL = '/gastos/regGastos'
+LOGOUT_REDIRECT_URL = 'inicio:index'
 
 # Ruta a la página de inicio de sesión (si no usas decoradores específicos)
 LOGIN_URL = '/login/'

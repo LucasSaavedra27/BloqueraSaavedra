@@ -88,13 +88,6 @@ border-radius: 10px;
     max-width: 1600px;
 }
 
-.graph{
-    margin-top: 2rem;
-    margin-bottom: 8.6rem;
-    min-width: 45%;
-    min-height: 500px;
-}
-
 #btn-stats{
     color: white;
     font-size: 17px;
@@ -277,3 +270,23 @@ border-radius: 10px;
     align-items: center;
     justify-content: center;
 }
+
+.card-graph{
+    background-color: rgb(32,37,49,0.05);
+    border-radius: 10px;
+    width: auto;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+
+
+
+@media (max-width: 768px) { /* Ajusta este valor si es necesario */
+    .container-card-agregar{
+        width: auto;
+    }
+  }

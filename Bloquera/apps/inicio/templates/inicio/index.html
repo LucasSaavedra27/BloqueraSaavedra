@@ -62,22 +62,23 @@
 
   <section>
     <div class="container d-flex justify-content-center">
-      <div class="card-calculadora">
-        <h4 class="text-center mt-4 pb-4" style="font-family:  Cardo, serif; color: white; font-size: 40px;">Calculadora de block por metro cuadrado</h4>
+      <div class="card-calculadora mx-auto">
+        <h4 class="text-center mt-4 pb-4" style="font-family: Cardo, serif; color: white; font-size: 40px;">Calculadora de block por metro cuadrado</h4>
         <div class="row align-items-center justify-content-center">
-          <div class="col-md-6 d-flex justify-content-center">
-            <img src="{% static 'img/block-front.png' %}" alt="Block" style="width: 65%;">
-          </div>
-          <div class="col-md-6">
-            <label for="metrosCuadrados" style="font-size: 20px;">Área a cubrir (Metros cuadrados)</label>
-            <input type="number" id="metrosCuadrados" class="form-control" style="width: 40%;">
-            <label for="resultado" class="pt-3"  style="font-size: 20px; display: none;" id="resultadoLabel">Cantidad de block necesaria:</label>
-            <input type="number" class="form-control" id="resultado" style="width: 40%; background-color: #ec912b; border: none; display: none; color: white;" disabled>
-            <button class="btn-calcular-block mb-2" id="btnCalcular">Calcular</button>
-            <button type="reset" id="btnReiniciar" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-right"></i></button>
-          </div>
+            <div class="col-12 col-md-6 d-flex justify-content-center mb-3 mb-md-0">
+                <img src="{% static 'img/block-front.png' %}" alt="Block" style="width: 100%; max-width: 300px;">
+            </div>
+            <div class="col-12 col-md-6 text-center">
+                <label for="metrosCuadrados" style="font-size: 20px;">Área a cubrir (Metros cuadrados)</label>
+                <input type="number" id="metrosCuadrados" class="form-control mx-auto" style="max-width: 300px;">
+                <label for="resultado" class="pt-3" style="font-size: 20px; display: none;" id="resultadoLabel">Cantidad de block necesaria:</label>
+                <input type="number" class="form-control mx-auto" id="resultado" style="max-width: 300px; background-color: #ec912b; border: none; display: none; color: white;" disabled>
+                <button class="btn-calcular-block mt-3 mb-2" id="btnCalcular">Calcular</button>
+                <button type="reset" id="btnReiniciar" class="btn btn-secondary mt-2" style="display: none;"><i class="fa-solid fa-rotate-right"></i></button>
+            </div>
         </div>
-      </div>
+    </div>
+    
     </div>
   </section>
   

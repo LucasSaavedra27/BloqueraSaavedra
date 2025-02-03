@@ -22,7 +22,15 @@
 
 {% block js %}
     <script src="{% static 'js/tratamientoFechas.js'%}"></script>
-    <script src="{% static 'js/tratamientoInputNumericos.js'%}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var inputElement1 = document.getElementById('id_precioDeCosto');
+    
+        inputElement1.addEventListener('input', function(event) {
+            event.target.value = event.target.value.replace(/[^0-9]/g, '');
+        });
+    });
+    </script>
 {% endblock %}
 
 {% endblock %}
