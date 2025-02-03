@@ -36,4 +36,4 @@ class Materiales(models.Model):
     cantidadMinRequerida = models.PositiveIntegerField(blank=False,null=False)
     
     def __str__(self):
-        return self.nombre
+        return f"{self.nombre} (${self.precioDeCosto})"

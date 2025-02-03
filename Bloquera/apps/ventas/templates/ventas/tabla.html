@@ -56,7 +56,10 @@
                 <td>{{ venta.fechaDeVenta|date:"d/m/Y" }}</td>
                 <td>{{ venta.formaDePago }}</td>
                 <td>{{ venta.lugarVenta }}</td>
-                <td>${{ venta.total }}</td>
+                {% load l10n %}
+                    {% localize on %}
+                    <td>${{ venta.total }}</td>
+                    {% endlocalize %}
                 <td>
                     <ul>
                         {% for detalle in venta.detalleVenta.all %}

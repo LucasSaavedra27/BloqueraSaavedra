@@ -27,7 +27,10 @@
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ producto.nombre }}</td>
+                            {% load l10n %}
+                            {% localize on %}
                             <td>${{ producto.precioDeCosto }}</td>
+                            {% endlocalize %}
                             <td>{{ producto.unidadDeMedida }}</td>
                             {% if producto.cantidadDisponible <= producto.cantidadMinRequerida %}
                                 <td style="background-color: #cf4128;">

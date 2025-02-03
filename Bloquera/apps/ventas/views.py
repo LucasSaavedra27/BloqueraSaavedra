@@ -5,18 +5,20 @@ from django.http import JsonResponse
 from .models import Block, Venta, DetalleVenta
 from django.template.loader import get_template
 from django.http import HttpResponse
-from xhtml2pdf import pisa
+from xhtml2pdf import pisa # type: ignore
 from io import BytesIO
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def regVentas(request):
-    ventas = Venta.objects.all()
+    ventas = Venta.objects.all().order_by('-fechaDeVenta')
     paginator = Paginator(ventas, 10)  
     page_number = request.GET.get('page', 1)
     page_obj = paginator.get_page(page_number)
     return render(request, 'ventas/regVentas.html', {'page_obj': page_obj})
 
-
+@login_required
 def agregarVenta(request):
     if request.method == 'POST':
         ventaForm = FormularioVenta(request.POST)
@@ -39,7 +41,7 @@ def agregarVenta(request):
             
             venta.total = totalVenta
             venta.save() #acá se actualiza la venta con todos los detalles de venta y se actualiza el precio total de la venta
-            return redirect('/ventas')
+            return redirect('/ventas/regVentas')
     else:
         ventaForm = FormularioVenta()
         detalleVentaFormset = DetalleVentaFormSet()
@@ -48,7 +50,7 @@ def agregarVenta(request):
 
 
 
-
+@login_required
 def obtener_precio_block(request, block_id):
     try:
         block = Block.objects.get(pk=block_id)
@@ -56,7 +58,7 @@ def obtener_precio_block(request, block_id):
     except Block.DoesNotExist:
         return JsonResponse({'error': 'Producto no encontrado'}, status=404)
 
-
+@login_required
 def obtener_detalles_venta(request, venta_id):
     try:
         # Obtener la venta y sus detalles
@@ -86,7 +88,7 @@ def obtener_detalles_venta(request, venta_id):
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
     
-    
+@login_required  
 def buscarVentas(request):
     ventas = Venta.objects.all()
     fecha_inicio = request.GET.get('busqueda_inicio')
@@ -98,12 +100,12 @@ def buscarVentas(request):
     elif fecha_fin:
         ventas = ventas.filter(fechaDeVenta=fecha_fin)
     else:
-        redirect("/ventas")
+        redirect("/ventas/regGastos")
    
-    return render(request, 'ventas/Regventas.html', {'page_obj': ventas, 'fecha_inicio': fecha_inicio, 'fecha_fin': fecha_fin})
+    return render(request, 'ventas/regVentas.html', {'page_obj': ventas, 'fecha_inicio': fecha_inicio, 'fecha_fin': fecha_fin})
 
 
-
+@login_required
 def generarPDFVentas(request):
 #ventas = Venta.objects.all()  # Obtener todas las ventas
     ventas = Venta.objects.prefetch_related('detalleVenta').all()
